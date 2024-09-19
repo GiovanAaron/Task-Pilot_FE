@@ -3,7 +3,7 @@
     <thead>
       <tr>
         <th scope="col">#</th>
-        <th scope="col" style="width: 16rem;">Title</th>
+        <th scope="col" style="width: 16rem">Title</th>
         <th scope="col">Status</th>
         <th scope="col">Priority</th>
         <th scope="col">Difficulty</th>
@@ -17,15 +17,41 @@
         <td>Write introduction to the thesis la alalslald</td>
         <td>
           <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+            <button
+              class="btn {{ console.log(selectedStatus) }}"
+              type="button"
+              id="dropdownMenuButton"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
               {{ selectedStatus }}
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <li><a class="dropdown-item" href="#" @click.prevent="selectStatus('Backlog')">Backlog</a></li>
-              <li><a class="dropdown-item" href="#" @click.prevent="selectStatus('LaunchPad')">LaunchPad</a></li>
-              <li><a class="dropdown-item" href="#" @click.prevent="selectStatus('In Progress')">In Progress</a></li>
-              <li><a class="dropdown-item" href="#" @click.prevent="selectStatus('Complete')">Complete</a></li>
-              <li><a class="dropdown-item" href="#" @click.prevent="selectStatus('Archive')">Archive</a></li>
+              <li>
+                <a class="dropdown-item" href="#" @click.prevent="selectStatus('Backlog')"
+                  >Backlog</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="#" @click.prevent="selectStatus('LaunchPad')"
+                  >LaunchPad</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="#" @click.prevent="selectStatus('In Progress')"
+                  >In Progress</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="#" @click.prevent="selectStatus('Complete')"
+                  >Complete</a
+                >
+              </li>
+              <li>
+                <a class="dropdown-item" href="#" @click.prevent="selectStatus('Archive')"
+                  >Archive</a
+                >
+              </li>
             </ul>
           </div>
         </td>
@@ -48,23 +74,97 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   name: 'DropdownComponent',
   setup() {
-    const selectedStatus = ref<string>('Launch Pad'); // Default dropdown button text
-
+    const selectedStatus = ref<string>('Launch Pad') // Default dropdown button text
+    let statusColor = <string>'#FFFFFF' // Default dropdown button color
     // Function to update the dropdown button's text
     const selectStatus = (status: string) => {
-      selectedStatus.value = status;
-    };
+      selectedStatus.value = status
+    }
 
-    return { selectedStatus, selectStatus };
-  },
-});
+    const selectColor = (status: string) => {
+      console.log('hi', status)
+
+      switch (status) {
+        case 'Backlog':
+          statusColor = 'btn-backlog'
+          break
+        case 'Launch Pad':
+          statusColor = 'btn-launchpad'
+          break
+        case 'In Progress':
+          statusColor = 'btn-inprogress'
+          break
+        case 'Complete':
+          statusColor = 'btn-complete'
+          break
+        case 'Archive':
+          statusColor = 'btn-archive'
+          break
+      }
+    }
+
+    return { selectedStatus, selectStatus, selectColor, statusColor }
+  }
+})
 </script>
 
-<style scoped>
-@import 'bootstrap/dist/css/bootstrap.css';
+<style>
+.btn-backlog {
+  background-color: #e0e0e0; /* Backlog background color */
+  border-color: #bdbdbd; /* Darker border color */
+}
+
+.btn-backlog:hover {
+  background-color: #bdbdbd; /* Darker hover background color */
+  border-color: #9e9e9e; /* Even darker border color on hover */
+}
+
+/* LaunchPad Button */
+.btn-launchpad {
+  background-color: #d5b383; /* LaunchPad background color */
+  border-color: #c39a5b; /* Darker border color */
+}
+
+.btn-launchpad:hover {
+  background-color: #c39a5b; /* Darker hover background color */
+  border-color: #a6784a; /* Even darker border color on hover */
+}
+
+/* In Progress Button */
+.btn-inprogress {
+  background-color: #b0c4cb; /* In Progress background color */
+  border-color: #97a8af; /* Darker border color */
+}
+
+.btn-inprogress:hover {
+  background-color: #97a8af; /* Darker hover background color */
+  border-color: #7f8f96; /* Even darker border color on hover */
+}
+
+/* Complete Button */
+.btn-complete {
+  background-color: #a5dd91; /* Complete background color */
+  border-color: #85be72; /* Darker border color */
+}
+
+.btn-complete:hover {
+  background-color: #85be72; /* Darker hover background color */
+  border-color: #6a9a5a; /* Even darker border color on hover */
+}
+
+/* Archive Button */
+.btn-archive {
+  background-color: #f3cfcf; /* Archive background color */
+  border-color: #d9b1b1; /* Darker border color */
+}
+
+.btn-archive:hover {
+  background-color: #d9b1b1; /* Darker hover background color */
+  border-color: #b69393; /* Even darker border color on hover */
+}
 </style>
