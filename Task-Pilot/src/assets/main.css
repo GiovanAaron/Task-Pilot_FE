@@ -1,0 +1,44 @@
+@import './base.css';
+
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+@font-face {
+  font-family: 'Move-X';
+  src: url("../assets/fonts/Move-X\ Italic\ demo.otf"),
+  url("../assets/fonts/Move-X\ Bold\ demo.otf"),
+  url("../assets/fonts/Move-X\ demo.otf"),
+  url("../assets/fonts/Move-X\ Light\ demo.otf"),
+  url("../assets/fonts/Move-X\ Light\ Italic\ demo.otf"),
+ 
+}
+
+h4 {
+  font-family: 'Move-X';
+  font-style: italic;
+
+}
+
+h3{
+  font-family: "Move-X";
+  font-style: italic;
+  font-weight: bold;
+}
+
+a,
+.green {
+  text-decoration: none;
+  color: white;
+  transition: 0.4s;
+  padding: 3px;
+}
+
+@media (hover: hover) {
+  a:hover {
+    background-color: hsla(160, 100%, 37%, 0.2);
+    color: hsla(160, 100%, 37%, 1); /* Custom green */
+  }
+}
