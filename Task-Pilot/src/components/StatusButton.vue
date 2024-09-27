@@ -1,61 +1,88 @@
 <template>
-    <div class="dropdown">
-      <button
-        page="2334"
-        id="dropdownMenuButton"
-        type="button"
-        :class="['dropdown-toggle',buttonClass ]"
-        @click="toggleDropdown"
-        :aria-expanded="isExpanded.toString()"
-      >
-        {{ selectedStatus }}
-      </button>
-      <ul v-if="isExpanded" class="dropdown-menu show">
-        <li><a class="dropdown-item" href="#" @click.prevent="selectStatus('Backlog', $event)">Backlog</a></li>
-        <li><a class="dropdown-item" href="#" @click.prevent="selectStatus('LaunchPad', $event)">LaunchPad</a></li>
-        <li><a class="dropdown-item" href="#" @click.prevent="selectStatus('In Progress', $event)">In Progress</a></li>
-        <li><a class="dropdown-item" href="#" @click.prevent="selectStatus('Complete', $event)">Complete</a></li>
-        <li><a class="dropdown-item" href="#" @click.prevent="selectStatus('Archive', $event)">Archive</a></li>
-      </ul>
-    </div>
-  </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        isExpanded: false,
-        selectedStatus: 'LaunchPad'
-      };
-    },
-    computed: {
-      buttonClass() {
-        return {
-          'btn btn-backlog': this.selectedStatus === 'Backlog',
-          'btn btn-launchpad': this.selectedStatus === 'LaunchPad',
-          'btn btn-inprogress': this.selectedStatus === 'In Progress',
-          'btn btn-complete': this.selectedStatus === 'Complete',
-          'btn btn-archive': this.selectedStatus === 'Archive'
-        };
-      }
-    },
-    methods: {
-      toggleDropdown() {
-        this.isExpanded = !this.isExpanded;
-      },
+  <div class="dropdown" @clickoutside="collapseDropdown">
+    <button
+      page="2334"
+      id="dropdownMenuButton"
+      type="button"
+      :class="['dropdown-toggle', buttonClass]"
+      @click="toggleDropdown"
+      :aria-expanded="isExpanded.toString()"
+    >
+      {{ selectedStatus }}
+    </button>
+    <ul v-if="isExpanded" class="dropdown-menu show">
+      <li>
+        <a class="dropdown-item" href="#" @click.prevent="selectStatus('Backlog', $event)"
+          >Backlog</a
+        >
+      </li>
+      <li>
+        <a class="dropdown-item" href="#" @click.prevent="selectStatus('Launch Pad', $event)"
+          >Launch Pad</a
+        >
+      </li>
+      <li>
+        <a class="dropdown-item" href="#" @click.prevent="selectStatus('In Progress', $event)"
+          >In Progress</a
+        >
+      </li>
+      <li>
+        <a class="dropdown-item" href="#" @click.prevent="selectStatus('Complete', $event)"
+          >Complete</a
+        >
+      </li>
+      <li>
+        <a class="dropdown-item" href="#" @click.prevent="selectStatus('Archive', $event)"
+          >Archive</a
+        >
+      </li>
+    </ul>
+  </div>
+</template>
 
-      selectStatus(status, event) {
-        const page = event.target.closest('div').querySelector('button').getAttribute('page')
-        console.log(page)
-        this.selectedStatus = status;
-        this.isExpanded = false;
+<script>
+export default {
+  data() {
+    return {
+      isExpanded: false,
+      selectedStatus: 'Launch Pad'
+    }
+  },
+  computed: {
+    buttonClass() {
+      return {
+        'btn btn-backlog': this.selectedStatus === 'Backlog',
+        'btn btn-launchpad': this.selectedStatus === 'Launch Pad',
+        'btn btn-inprogress': this.selectedStatus === 'In Progress',
+        'btn btn-complete': this.selectedStatus === 'Complete',
+        'btn btn-archive': this.selectedStatus === 'Archive'
       }
     }
-  };
-  </script>
+  },
+  methods: {
+    toggleDropdown() {
+      this.isExpanded = !this.isExpanded
+    },
+
+    selectStatus(status, event) {
+      const page = event.target.closest('div').querySelector('button').getAttribute('page')
+      console.log(page)
+      this.selectedStatus = status
+      this.isExpanded = false
+    },
+
+    collapseDropdown() {
+      console.log('activated')
+      this.isExpanded = false
+    }
+  }
+
   
-  <style>
- .btn-backlog {
+}
+</script>
+
+<style>
+.btn-backlog {
   background-color: #e0e0e0; /* Backlog background color */
   border-color: #bdbdbd; /* Darker border color */
 }
@@ -108,5 +135,4 @@
   background-color: #d9b1b1; /* Darker hover background color */
   border-color: #b69393; /* Even darker border color on hover */
 }
-  </style>
-  
+</style>
