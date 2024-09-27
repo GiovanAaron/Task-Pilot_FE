@@ -1,3 +1,12 @@
+<script setup lang="ts">
+
+import StatusButton from "@/components/StatusButton.vue"
+import PriorityButton from "@/components/PriorityButton.vue"
+import DifficultyToggle from "./DifficultyToggle.vue";
+import DueDate from "./DueDate.vue";
+
+</script>
+
 <template>
   <table class="table">
     <thead>
@@ -16,46 +25,11 @@
         <th scope="row">1</th>
         <td>Write introduction to the thesis la alalslald</td>
         <td>
-          <div class="dropdown">
-            <button
-              class="btn {{ console.log(selectedStatus) }}"
-              type="button"
-              id="dropdownMenuButton"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              {{ selectedStatus }}
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <li>
-                <a class="dropdown-item" href="#" @click.prevent="selectStatus('Backlog')"
-                  >Backlog</a
-                >
-              </li>
-              <li>
-                <a class="dropdown-item" href="#" @click.prevent="selectStatus('LaunchPad')"
-                  >LaunchPad</a
-                >
-              </li>
-              <li>
-                <a class="dropdown-item" href="#" @click.prevent="selectStatus('In Progress')"
-                  >In Progress</a
-                >
-              </li>
-              <li>
-                <a class="dropdown-item" href="#" @click.prevent="selectStatus('Complete')"
-                  >Complete</a
-                >
-              </li>
-              <li>
-                <a class="dropdown-item" href="#" @click.prevent="selectStatus('Archive')"
-                  >Archive</a
-                >
-              </li>
-            </ul>
-          </div>
+          <StatusButton/>
         </td>
-        <td>@mdo</td>
+        <td><PriorityButton/></td>
+        <td><DifficultyToggle/></td>
+        <td><DueDate/></td>
       </tr>
       <tr>
         <th scope="row">2</th>
